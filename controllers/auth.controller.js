@@ -33,6 +33,7 @@ class AuthController{
     }
     async logIntoAccount(request, response) {
         const {username, password} = request.body;
+        console.log(request.body)
         console.log(username, password) 
         const user = await database.query("SELECT * FROM users  WHERE username = $1",[username])
         if (!user.rows[0]) return response.json({message: "This user isn't exist"})
