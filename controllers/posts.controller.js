@@ -18,7 +18,7 @@ class PostController {
     async updatePost(request, response) {
         const {id, title, date} = request.body;
         const updated = await database.query("UPDATE posts set title = $1, date = $2 WHERE id = $3 RETURNING *", [title, date, id])
-        response.json(updated.rows[0])
+        response.json({message: "updated"})
     }
 }
 

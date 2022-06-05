@@ -24,8 +24,8 @@ class AuthController{
     }
     async deleteUser(request, response) {
         const id = request.params.id;
-        const result = await database.query("DELETE FROM users WHERE id = $1", [id]);
-        response.json({message: "Registration is successful"})
+        const result = await database.query("DELETE FROM users WHERE id = $1 RETURNING *", [id]);
+        response.json(result.rows)
     }
     async getUsers(request, response) {
         const users = await database.query("SELECT * FROM users");
