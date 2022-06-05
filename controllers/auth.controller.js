@@ -25,7 +25,7 @@ class AuthController{
     async deleteUser(request, response) {
         const id = request.params.id;
         const result = await database.query("DELETE FROM users WHERE id = $1", [id]);
-        response.json(result.rows[0])
+        response.json({message: "Registration is successful"})
     }
     async getUsers(request, response) {
         const users = await database.query("SELECT * FROM users");
@@ -33,8 +33,6 @@ class AuthController{
     }
     async logIntoAccount(request, response) {
         const {username, password} = request.body;
-        console.log(request.body)
-        console.log(username, password) 
         const user = await database.query("SELECT * FROM users  WHERE username = $1",[username])
         if (!user.rows[0]) return response.json({message: "This user isn't exist"})
 
@@ -43,7 +41,7 @@ class AuthController{
         if (!validPassword) return response.json({message: "Incorrect password"});
 
         const token = generateAccessToken(user.rows[0].id);
-        response.json({token: token})
+        response.json({token: token, id:user.rows[0].id})
     }
 }
 
