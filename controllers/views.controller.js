@@ -41,7 +41,7 @@ class ViewController {
     }
     async getUsersViews(request, response) {
         const TABLE_PREFIX = "view_";
-        const { name } = request.body;
+        const name = request.params.name;
         const isExist = await database.query(`SELECT * FROM information_schema.tables WHERE  table_name = $1`, [TABLE_PREFIX+name]);
         if (!Boolean(isExist.rows.length)) return response.json({message: `Table ${TABLE_PREFIX+name} isn't exists`})
 
