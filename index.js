@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors')
 
 const PORT = process.env.PORT || 8080;
+console.log(process.env)
 const app = express();
 const auth = require('./routes/auth.routes');
 const posts = require('./routes/post.routes')
