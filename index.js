@@ -13,6 +13,5 @@ app.use('/posts',posts);
 app.use('/auth', auth);
 app.use('/views', views)
 
-console.log(process.env.DATABASE_PORT);
 
 app.listen(PORT, () => console.log("App started at port " + PORT))
